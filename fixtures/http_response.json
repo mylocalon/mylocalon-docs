@@ -1,0 +1,1 @@
+{"type":"HTTP_RESPONSE","reqId":"rq_01H","status":200,"headers":[["content-type","application/json"],["set-cookie","a=1"],["set-cookie","b=2"]],"bodyB64":"eyJvayI6dHJ1ZX0=","durationMs":12}

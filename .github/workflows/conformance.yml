@@ -1,0 +1,43 @@
+# Cross-repo conformance: replay the shared protocol fixtures against the
+# Gateway (Go) and the reference SDK (TS) whenever the fixtures change.
+name: conformance
+on:
+  push:
+    paths: ["fixtures/**"]
+  pull_request:
+    paths: ["fixtures/**"]
+  workflow_dispatch:
+
+jobs:
+  gateway:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: docs
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/mylocalon-gateway
+          path: mylocalon-gateway
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: mylocalon-gateway/go.mod
+          cache-dependency-path: mylocalon-gateway/go.sum
+      - working-directory: mylocalon-gateway
+        run: go test ./internal/protocol/ -run 'TestFixtures' -v
+
+  sdk-node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: docs
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/mylocalon-sdk-node
+          path: mylocalon-sdk-node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - working-directory: mylocalon-sdk-node
+        run: npm ci && npx vitest run test/codec.test.ts

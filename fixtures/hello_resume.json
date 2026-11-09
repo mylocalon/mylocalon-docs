@@ -1,0 +1,1 @@
+{"type":"HELLO","protocol":1,"token":"<JWT>","client":{"name":"mylocalon-cli","version":"0.1.0","os":"darwin"},"tunnel":{},"resume":{"tunnelId":"tnl_abc123","resumeToken":"rsm_9f00"}}
