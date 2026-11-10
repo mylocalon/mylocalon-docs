@@ -1,7 +1,7 @@
 # mylocalon brand
 
-The mark is a **location pin** (*local*) with a **power symbol** at its heart (*on*):
-your local app, switched on for the internet.
+The mark is a **location pin** (*local*) holding a **globe** (*on the internet*):
+your local app, reachable from anywhere.
 
 | File | Use it for |
 |---|---|
