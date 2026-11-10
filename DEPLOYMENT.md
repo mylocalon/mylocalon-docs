@@ -66,7 +66,8 @@ scp bin/gateway-linux root@SERVER:/opt/mylocalon/gateway/bin/gateway
 rsync -a --delete --exclude /node_modules --exclude /.next --exclude /.env --exclude /keys \
   mylocalon-platform/ root@SERVER:/opt/mylocalon/platform/
 ssh root@SERVER 'chown -R mylocalon:mylocalon /opt/mylocalon && \
-  cd /opt/mylocalon/platform && sudo -u mylocalon npm ci && sudo -u mylocalon npm run build'
+  cd /opt/mylocalon/platform && sudo -u mylocalon -H npm ci && sudo -u mylocalon -H npm run build && \
+  sudo -u mylocalon -H npm prune --omit=dev'   # drop build/test-only tools
 
 ssh root@SERVER 'systemctl enable --now mylocalon-platform mylocalon-gateway && systemctl restart caddy'
 ```
